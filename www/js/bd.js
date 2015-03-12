@@ -32,7 +32,7 @@ var db = new ydn.db.Storage('ysidomo');
 		name: 'Sala'}, 0);
 	db.put('rooms', {
 		name: 'Baño'}, 1);
-	console.log(db);
+	
 	
 
 
@@ -71,7 +71,8 @@ var db = new ydn.db.Storage('ysidomo');
 
 	var getRooms = function(success){
 			db.from('rooms').list().done(function(records){
-					console.log(records);
+					//Se nos habia perdido la llamada a success por ahi
+					success(records);
 				});
 		};
 

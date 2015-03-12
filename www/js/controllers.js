@@ -10,7 +10,8 @@ angular.module('starter.controllers', [])
           console.log(rooms[i].name);
             var devices = Devices.getRoomDevices(rooms[i].name);
             roomDevices.push({
-                name: rooms[i],
+                //estabamos añadiendo un objeto entero y no el name
+                name: rooms[i].name,
                 devices: devices
             });
         }
