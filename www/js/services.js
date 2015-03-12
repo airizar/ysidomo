@@ -29,6 +29,12 @@ angular.module('starter.services', [])
     name: 'Perry Governor',
     lastText: 'Look at my mukluks!',
     face: 'https://pbs.twimg.com/profile_images/491995398135767040/ie2Z_V6e.jpeg'
+  }, {
+    id: 5,
+    name: 'Tardar Sauce',
+    lastText: 'Grumpy Cat!!!!',
+    face: 'http://www.gatosdomesticos.com/wp-content/uploads/2013/02/Grumpy-Cat-biografia.jpg'
+    //http://www.gatosdomesticos.com/wp-content/uploads/2013/02/Grumpy-Cat-biografia.jpg
   }];
 
   return {
@@ -81,6 +87,12 @@ angular.module('starter.services', [])
     name: 'Perry Governor',
     notes: 'Just the nicest guy',
     face: 'https://pbs.twimg.com/profile_images/491995398135767040/ie2Z_V6e.jpeg'
+  }, {
+    id: 5,
+    name: 'Tardar Sauce',
+    lastText: 'Grumpy Cat!!!!',
+    face: 'http://www.gatosdomesticos.com/wp-content/uploads/2013/02/Grumpy-Cat-biografia.jpg'
+    //http://www.gatosdomesticos.com/wp-content/uploads/2013/02/Grumpy-Cat-biografia.jpg
   }];
 
 
