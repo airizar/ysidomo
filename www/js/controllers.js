@@ -1,4 +1,17 @@
 angular.module('starter.controllers', [])
+////////////////////////////////
+.controller('DevicesCtrl', ["$scope", "$stateParams", function($scope, $stateParams) {
+  //$scope.chat = Chats.get($stateParams.chatId);
+}])
+
+.controller('WarningsCtrl', ["$scope" ,function($scope) {
+  //$scope.friends = Friends.all();
+}])
+
+.controller('ActionsCtrl', ["$scope", "$stateParams", function($scope, $stateParams) {
+ // $scope.friend = Friends.get($stateParams.friendId);
+}])
+///////////////////////////////
 
 .controller('DashCtrl', ["$scope",function($scope) {}])
 
