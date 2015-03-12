@@ -1,13 +1,23 @@
 <ion-view view-title="Devices">
-  <ion-content class="padding">
-    <div class="list card" ng-controller="DevicesCtrl">
-      <div class="list" ng-repeat="device in devices">
-        <div class="item item-divider">
-          {{device.name}}
-           <a class = "item-icon-right" ><i class="icon ion-plus"></i></a>
+    <ion-content class="padding">
+        <div class="list card" ng-controller="DevicesCtrl">
+            <div class="list" ng-repeat="device in devices">
+                <div class="item item-divider">
+                    {{device.name}}
+                    <a class="item-icon-right"><i class="icon ion-plus"></i></a>
+                </div>
+                    
+                    <ion-item class="item-toggle" ng-repeat="roomDevice in device.devices">
+                       <a href="" href="#" class="item">{{roomDevice.name}}</a>
+                        <label class="toggle">
+                            <input type="checkbox" ng-model="roomDevice.status">
+                            <div class="track">
+                                <div class="handle"></div>
+                            </div>
+                        </label>
+                    </ion-item>
+
+            </div>
         </div>
-        <a href="" ng-repeat="roomDevice in device.devices" href="#" class="item">{{roomDevice.name}}</a>
-      </div>
-    </div>
-  </ion-content>
+    </ion-content>
 </ion-view>
