@@ -1,33 +1,12 @@
 <ion-view view-title="Devices">
   <ion-content class="padding">
-    <div class="list card">
-      <div class="list">
+    <div class="list card" ng-controller="DevicesCtrl">
+      <div class="list" ng-repeat="device in devices">
         <div class="item item-divider">
-          Cocina
-           <a class = "item-icon-right" href=""><i class="icon ion-plus"></i></a>
+          {{device.name}}
+           <a class = "item-icon-right" ><i class="icon ion-plus"></i></a>
         </div>
-        <a href="#" class="item">Sensor xx</a>
-        <a href="#" class="item">Sensor xx</a>
-        <a href="#" class="item">Sensor xx</a>
-      </div>
-      <div class="list">
-        <div class="item item-divider">
-          Salón
-          <a class = "item-icon-right" href=""><i class="icon ion-plus"></i></a>
-          
-        </div>
-        <a href="#" class="item">Sensor xx</a>
-        <a href="#" class="item">Sensor xx</a>
-        <a href="#" class="item">Sensor xx</a>
-      </div>
-      <div class="list">
-        <div class="item item-divider">
-          Baño
-            <a class = "item-icon-right" href=""><i class="icon ion-plus"></i></a>
-        </div>
-        <a href="#" class="item">Sensor xx</a>
-        <a href="#" class="item">Sensor xx</a>
-        <a href="#" class="item">Sensor xx</a>
+        <a href="" ng-repeat="roomDevice in device.devices" href="#" class="item">{{roomDevice.name}}</a>
       </div>
     </div>
   </ion-content>

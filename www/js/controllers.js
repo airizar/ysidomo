@@ -1,7 +1,16 @@
 angular.module('starter.controllers', [])
+
 ////////////////////////////////
-.controller('DevicesCtrl', ["$scope", "$stateParams", function($scope, $stateParams) {
-  //$scope.chat = Chats.get($stateParams.chatId);
+.controller('DevicesCtrl', ["$scope","Rooms","Devices", "$stateParams", function($scope,Rooms,Devices, $stateParams) {
+  var rooms=Rooms.getAll();
+  var roomDevices=[];
+  for (var i = rooms.length - 1; i >= 0; i--) {
+    var devices=Devices.getRoomDevices(rooms[i]);
+    roomDevices.push({name:rooms[i],devices:devices});
+  }
+   $scope.devices=roomDevices;
+   
+
 }])
 
 .controller('WarningsCtrl', ["$scope" ,function($scope) {
