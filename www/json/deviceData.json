@@ -1,0 +1,33 @@
+{
+    devices: [{
+        name: 'Luz',
+        room: 'Sala',
+        type: 'binario',
+        status: true
+    }, {
+        name: 'Persiana',
+        room: 'Sala',
+        type: 'decimal',
+        status: 10
+    }, {
+        name: 'Televisión',
+        room: 'Sala',
+        type: 'binario',
+        status: false
+    }, {
+        name: 'Luz',
+        room: 'Baño',
+        type: 'binario',
+        status: true
+    }, {
+        name: 'Persiana',
+        room: 'Baño',
+        type: 'decimal',
+        status: 10
+    }, {
+        name: 'Grifo',
+        room: 'Baño',
+        type: 'decimal',
+        status: 50
+    }]
+}
