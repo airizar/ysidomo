@@ -78,7 +78,8 @@ angular.module('starter.DB', [])
 	        db.put('warnings', {
 	            sensor: "Grifo",
 	            room: "baño",
-	            caudal: "50"
+	            alert: "caudal",
+	            status: "50"
 	        }).done(function(){
 	        	notifyWarnings();
 	        });
@@ -87,7 +88,8 @@ angular.module('starter.DB', [])
 	        	db.put('warnings', {
 		            sensor: "Grifo",
 		            room: "baño",
-		            caudal: "50"
+		            alert: "caudal",
+		            status: "50"
 		        }).done(function(){
 		        	notifyWarnings();
 		        });
@@ -132,8 +134,10 @@ angular.module('starter.DB', [])
         var getRooms = function(success) {
             db.from('rooms').list().done(function(records) {
                 //Se nos habia perdido la llamada a success por ahi
-                //console.log(records);
+                console.log('Listing rooms...');
                 success(records);
+            }).fail(function(){
+            	console.log('No rooms');
             });
         };
 

@@ -21,9 +21,6 @@ angular.module('starter.controllers', [])
         }
     };
     BD.getRooms(success);
-
-
-
 }])
 
 .controller('WarningsCtrl', ["$scope", "BD", function($scope, BD) {
@@ -31,12 +28,21 @@ angular.module('starter.controllers', [])
 
     var notify = function(warnings) {
         BD.getWarnings(function(warnings){
+          for(var i=0; i<warnings.length; i++){
+          var warning = warnings[i];           
+            $scope.warnings.push({
+                //estabamos añadiendo un objeto entero y no el name
+                sensor:  warning.sensor +" - " + warning.room,
+                wrnMsg: warning.alert + " - " + warning.status
+            });
+          }
+            
             console.log(warnings.length);
             $scope.numWarnings = warnings.length;
         });
         
     };
-    
+    $scope.warnings = [];
     BD.observeWarnings({
         notify : notify
     });
@@ -47,29 +53,4 @@ angular.module('starter.controllers', [])
     }])
     ///////////////////////////////
 
-.controller('DashCtrl', ["$scope", function($scope) {}])
-
-.controller('ChatsCtrl', ["$scope", "Chats", function($scope, Chats) {
-    $scope.chats = Chats.all();
-    $scope.remove = function(chat) {
-        Chats.remove(chat);
-    };
-}])
-
-.controller('ChatDetailCtrl', ["$scope", "$stateParams", "Chats", function($scope, $stateParams, Chats) {
-    $scope.chat = Chats.get($stateParams.chatId);
-}])
-
-.controller('FriendsCtrl', ["$scope", "Friends", function($scope, Friends) {
-    $scope.friends = Friends.all();
-}])
-
-.controller('FriendDetailCtrl', ["$scope", "$stateParams", "Friends", function($scope, $stateParams, Friends) {
-    $scope.friend = Friends.get($stateParams.friendId);
-}])
-
-.controller('AccountCtrl', ["$scope", function($scope) {
-    $scope.settings = {
-        enableFriends: true
-    };
-}]);
+;
