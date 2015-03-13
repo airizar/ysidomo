@@ -6,16 +6,16 @@ angular.module('starter.controllers', [])
     var success = function(rooms) {
 
         var success1 = function(roomDevices) {
-                 $scope.devices.push({
-                    //estabamos añadiendo un objeto entero y no el name
-                    name: roomDevices[0].room,
-                    devices: roomDevices
-                });
-            };
+            $scope.devices.push({
+                //estabamos añadiendo un objeto entero y no el name
+                name: roomDevices[0].room,
+                devices: roomDevices
+            });
+        };
 
         $scope.devices = [];
         for (var i = rooms.length - 1; i >= 0; i--) {
-            
+
             BD.getRoomDevices(rooms[i].name, success1);
 
         }
@@ -28,12 +28,18 @@ angular.module('starter.controllers', [])
 
 .controller('WarningsCtrl', ["$scope", "BD", function($scope, BD) {
     //$scope.friends = Friends.all();
-    
-    var success = function(warnings){
-      console.log(warnings);
-      $scope.numWarnings = warnings.length;
+
+    var notify = function(warnings) {
+        BD.getWarnings(function(warnings){
+            console.log(warnings.length);
+            $scope.numWarnings = warnings.length;
+        });
+        
     };
-    BD.getWarnings(success);
+    
+    BD.observeWarnings({
+        notify : notify
+    });
 }])
 
 .controller('ActionsCtrl', ["$scope", "$stateParams", function($scope, $stateParams) {
