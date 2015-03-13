@@ -27,16 +27,23 @@ var db = new ydn.db.Storage('ysidomo');
 		room: 'Baño',
 		type: 'decimal',
 		status: 10}, 4);
+	db.put('devices', {
+		name: 'Grifo',
+		room: 'Baño',
+		type: 'decimal',
+		status: 50}, 5);
 
 	db.put('rooms', {
 		name: 'Sala'}, 0);
 	db.put('rooms', {
 		name: 'Baño'}, 1);
+
+	db.put('warnings',{sensor: "Grifo", room: "baño", caudal: "50"},0)
 	
 	
 
 
-
+/*
 	var devices=[{
 		id: 0,
 		name: 'Luz',
@@ -68,16 +75,23 @@ var db = new ydn.db.Storage('ysidomo');
 		type: 'decimal',
 		status: 10
 	}];
-
+*/
 	var getRooms = function(success){
 			db.from('rooms').list().done(function(records){
 					//Se nos habia perdido la llamada a success por ahi
 					success(records);
 				});
 		};
+	var getWarnings = function(success){
+		db.from('warnings').list().done(function(records){
+					//Se nos habia perdido la llamada a success por ahi
+					success(records);
+				});
+	};
 
 	return {
 		getRooms: getRooms,
+		getWarnings: getWarnings,
 		getRoomDevices: function(room){
 			var device_list=[];
 			for (var i = devices.length - 1; i >= 0; i--) {

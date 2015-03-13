@@ -25,6 +25,7 @@ angular.module('starter.controllers', [])
 
 .controller('WarningsCtrl', ["$scope", function($scope) {
     //$scope.friends = Friends.all();
+    $scope.numWarnings=3;
 }])
 
 .controller('ActionsCtrl', ["$scope", "$stateParams", function($scope, $stateParams) {
