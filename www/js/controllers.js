@@ -1,31 +1,39 @@
 angular.module('starter.controllers', [])
 
 ////////////////////////////////
-.controller('DevicesCtrl', ["$scope", /*"Rooms",*/ "Devices", "$stateParams", function($scope, /*Rooms,*/ Devices, $stateParams) {
+.controller('DevicesCtrl', ["$scope", "BD", "$stateParams", function($scope, BD, $stateParams) {
     var rooms;
     var success = function(rooms) {
-        var roomDevices = [];
+
+        var success1 = function(roomDevices) {
+                 $scope.devices.push({
+                    //estabamos añadiendo un objeto entero y no el name
+                    name: roomDevices[0].room,
+                    devices: roomDevices
+                });
+            };
+
+        $scope.devices = [];
         for (var i = rooms.length - 1; i >= 0; i--) {
-          console.log(rooms[i]);
-          console.log(rooms[i].name);
-            var devices = Devices.getRoomDevices(rooms[i].name);
-            roomDevices.push({
-                //estabamos añadiendo un objeto entero y no el name
-                name: rooms[i].name,
-                devices: devices
-            });
+            
+            BD.getRoomDevices(rooms[i].name, success1);
+
         }
-        $scope.devices = roomDevices;
     };
-    Devices.getRooms(success);
+    BD.getRooms(success);
 
 
 
 }])
 
-.controller('WarningsCtrl', ["$scope", function($scope) {
+.controller('WarningsCtrl', ["$scope", "BD", function($scope, BD) {
     //$scope.friends = Friends.all();
-    $scope.numWarnings=3;
+    
+    var success = function(warnings){
+      console.log(warnings);
+      $scope.numWarnings = warnings.length;
+    };
+    BD.getWarnings(success);
 }])
 
 .controller('ActionsCtrl', ["$scope", "$stateParams", function($scope, $stateParams) {

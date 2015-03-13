@@ -1,111 +1,153 @@
 angular.module('DB', [])
-.factory('Devices', function () {
+    .factory('BD', function() {
 
-var db = new ydn.db.Storage('ysidomo');
-	db.put('devices', {
-		name: 'Luz',
-		room: 'Sala',
-		type: 'binario',
-		status: true}, 0);
-	db.put('devices', {
-		name: 'Persiana',
-		room: 'Sala',
-		type: 'decimal',
-		status: 10}, 1);
-	db.put('devices', {
-		name: 'Televisión',
-		room: 'Sala',
-		type: 'binario',
-		status: false}, 2);
-	db.put('devices', {
-		name: 'Luz',
-		room: 'Baño',
-		type: 'binario',
-		status: true}, 3);
-	db.put('devices', {
-		name: 'Persiana',
-		room: 'Baño',
-		type: 'decimal',
-		status: 10}, 4);
-	db.put('devices', {
-		name: 'Grifo',
-		room: 'Baño',
-		type: 'decimal',
-		status: 50}, 5);
+        schema = {
+            stores: [{
+                name: 'devices', // required. object store name or TABLE name
+                keyPath: 'id', // keyPath.
+                autoIncrement: true, // if true, key will be automatically created
+                indexes: [{
+                    name: 'name'
+                }, {
+                    name: 'room'
+                }, {
+                    name: 'type'
+                }]
+            }, {
+                name: 'rooms',
+                keyPath: 'id',
+                autoIncrement: true,
+                indexes: [{
+                    name: 'name', // usually omitted. generally same as keyPath.
+                }]
+            }, {
+                name: 'warnings',
+                keyPath: 'id',
+                autoIncrement: true
+            }]
+        };
 
-	db.put('rooms', {
-		name: 'Sala'}, 0);
-	db.put('rooms', {
-		name: 'Baño'}, 1);
+        var db = new ydn.db.Storage('ysidomo', schema);
+        db.put('devices', {
+            name: 'Luz',
+            room: 'Sala',
+            type: 'binario',
+            status: true
+        });
+        db.put('devices', {
+            name: 'Persiana',
+            room: 'Sala',
+            type: 'decimal',
+            status: 10
+        });
+        db.put('devices', {
+            name: 'Televisión',
+            room: 'Sala',
+            type: 'binario',
+            status: false
+        });
+        db.put('devices', {
+            name: 'Luz',
+            room: 'Baño',
+            type: 'binario',
+            status: true
+        });
+        db.put('devices', {
+            name: 'Persiana',
+            room: 'Baño',
+            type: 'decimal',
+            status: 10
+        });
+        db.put('devices', {
+            name: 'Grifo',
+            room: 'Baño',
+            type: 'decimal',
+            status: 50
+        });
 
-	db.put('warnings',{sensor: "Grifo", room: "baño", caudal: "50"},0)
-	
-	
+        db.put('rooms', {
+            name: 'Sala'
+        });
+        db.put('rooms', {
+            name: 'Baño'
+        });
 
+        db.put('warnings', {
+            sensor: "Grifo",
+            room: "baño",
+            caudal: "50"
+        });
 
 /*
-	var devices=[{
-		id: 0,
-		name: 'Luz',
-		room: 'Sala',
-		type: 'binario',
-		status: true
-	},{
-		id: 1,
-		name: 'Persiana',
-		room: 'Sala',
-		type: 'decimal',
-		status: 10
-	},{
-		id: 2,
-		name: 'Televisión',
-		room: 'Sala',
-		type: 'binario',
-		status: false
-	},{
-		id: 5,
-		name: 'Luz',
-		room: 'Baño',
-		type: 'decimal',
-		status: true
-	},{
-		id: 6,
-		name: 'Persiana',
-		room: 'Baño',
-		type: 'decimal',
-		status: 10
-	}];
+
+        var devices = [{
+            id: 0,
+            name: 'Luz',
+            room: 'Sala',
+            type: 'binario',
+            status: true
+        }, {
+            id: 1,
+            name: 'Persiana',
+            room: 'Sala',
+            type: 'decimal',
+            status: 10
+        }, {
+            id: 2,
+            name: 'Televisión',
+            room: 'Sala',
+            type: 'binario',
+            status: false
+        }, {
+            id: 5,
+            name: 'Luz',
+            room: 'Baño',
+            type: 'decimal',
+            status: true
+        }, {
+            id: 6,
+            name: 'Persiana',
+            room: 'Baño',
+            type: 'decimal',
+            status: 10
+        }];
 */
-	var getRooms = function(success){
-			db.from('rooms').list().done(function(records){
-					//Se nos habia perdido la llamada a success por ahi
-					success(records);
-				});
-		};
-	var getWarnings = function(success){
-		db.from('warnings').list().done(function(records){
-					//Se nos habia perdido la llamada a success por ahi
-					success(records);
-				});
-	};
+        var getRooms = function(success) {
+            db.from('rooms').list().done(function(records) {
+                //Se nos habia perdido la llamada a success por ahi
+                //console.log(records);
+                success(records);
+            });
+        };
+        var getWarnings = function(success) {
+            db.from('warnings').list().done(function(records) {
+                //Se nos habia perdido la llamada a success por ahi
+                success(records);
+            });
+        };
+        var getRoomDevices = function(room, success) {
+            if (room) {
 
-	return {
-		getRooms: getRooms,
-		getWarnings: getWarnings,
-		getRoomDevices: function(room){
-			var device_list=[];
-			for (var i = devices.length - 1; i >= 0; i--) {
-				if (devices[i].room==room){
-					device_list.push(devices[i]);
-				}
-			}
-			return device_list;
-		}
+                db.from('devices').where('room', '=', room).list().done(function(records) {
+                    success(records);
+                });
+            } else {
+                db.from('devices').list().done(function(records) {
+                    success(records);
+                });
+            }
+        };
 
-	};
-	
+        return {
+            getRooms: getRooms,
+            getWarnings: getWarnings,
+            getRoomDevices: getRoomDevices
 
-});/*
+        };
+
+
+    });
+/*
 .factory('Rooms', function () {
 
 
