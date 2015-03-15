@@ -19,11 +19,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             StatusBar.styleDefault();
         }
     });
-    //Obtener los datos mediante ajax
-    var success=function(devices){
-      //añadir devices base de datos
-    };
-    ajax.loadDeviceData(success);
+       //Obtener los datos mediante ajax
+    ajax.loadRoomsData(function(rooms){
+        BD.addRooms(rooms)
+    });
+    
+    ajax.loadDevicesData(function(devices){
+        BD.addDevices(devices)
+    });
+
+    ajax.loadWarningsData(function(warnings){
+        BD.addWarnings(warnings)
+    });
 })
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {

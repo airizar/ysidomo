@@ -31,111 +31,46 @@ angular.module('starter.DB', [])
 
         var db = new ydn.db.Storage('ysidomo', schema);
 
-        db.onReady(function(e) {
-            db.put('devices', {
-                name: 'Luz',
-                room: 'Sala',
-                type: 'binario',
-                status: true
-            });
-            db.put('devices', {
-                name: 'Persiana',
-                room: 'Sala',
-                type: 'decimal',
-                status: 10
-            });
-            db.put('devices', {
-                name: 'Televisión',
-                room: 'Sala',
-                type: 'binario',
-                status: false
-            });
-            db.put('devices', {
-                name: 'Luz',
-                room: 'Baño',
-                type: 'binario',
-                status: true
-            });
-            db.put('devices', {
-                name: 'Persiana',
-                room: 'Baño',
-                type: 'decimal',
-                status: 10
-            });
-            db.put('devices', {
-                name: 'Grifo',
-                room: 'Baño',
-                type: 'decimal',
-                status: 50
-            });
-
-            db.put('rooms', {
-                name: 'Sala'
-            });
-            db.put('rooms', {
-                name: 'Baño'
-            });
-
-            db.put('warnings', {
-                sensor: "Grifo",
-                room: "baño",
-                caudal: "50"
-            }).done(function() {
-                notifyWarnings();
-            });
 
 
-            db.put('warnings', {
-                sensor: "Grifo",
-                room: "baño",
-                caudal: "50"
-            }).done(function() {
-                notifyWarnings();
+        var addDevices = function(devices) {
+            db.onReady(function(e) {
+                for (var i = devices.length - 1; i >= 0; i--) {
+                    db.put('devices', devices[i]).done(function() {
+                        console.log(devices.length + ' sensores insertados');
+                    });
+                };
             });
-        });
+        };
 
 
-        /*
+        var addRooms = function(rooms) {
+            db.onReady(function(e) {
+                for (var i = rooms.length - 1; i >= 0; i--) {
+                    db.put('rooms', rooms[i]).done(function() {
+                        console.log(rooms.length + ' habitaciones insertadas');
+                    });
+                };
+            });
+        };
 
-                var devices = [{
-                    id: 0,
-                    name: 'Luz',
-                    room: 'Sala',
-                    type: 'binario',
-                    status: true
-                }, {
-                    id: 1,
-                    name: 'Persiana',
-                    room: 'Sala',
-                    type: 'decimal',
-                    status: 10
-                }, {
-                    id: 2,
-                    name: 'Televisión',
-                    room: 'Sala',
-                    type: 'binario',
-                    status: false
-                }, {
-                    id: 5,
-                    name: 'Luz',
-                    room: 'Baño',
-                    type: 'decimal',
-                    status: true
-                }, {
-                    id: 6,
-                    name: 'Persiana',
-                    room: 'Baño',
-                    type: 'decimal',
-                    status: 10
-                }];
-        */
+        var addWarnings = function(warnings) {
+            db.onReady(function(e) {
+                for (var i = warnings.length - 1; i >= 0; i--) {
+                    db.put('warnings', warnings[i]).done(function() {
+                        console.log(warnings.length + ' warnings insertados');
+                    });
+                };
+            });
+        };
+
         var getRooms = function(success) {
             db.from('rooms').list().done(function(records) {
                 //Se nos habia perdido la llamada a success por ahi
                 console.log('Listing rooms...');
                 success(records);
-            }).fail(function(){
-            	console.log('No rooms');
+            }).fail(function() {
+                console.log('No rooms');
             });
         };
 
@@ -170,28 +105,13 @@ angular.module('starter.DB', [])
         };
 
         return {
+            addWarnings: addWarnings,
+            addDevices: addDevices,
+            addRooms: addRooms,
             getRooms: getRooms,
             getWarnings: getWarnings,
             getRoomDevices: getRoomDevices,
             observeWarnings: observeWarnings,
             notifyWarnings: notifyWarnings
         };
-
-
     });
-/*
-.factory('Rooms', function () {
-
-
-		var getAll = function(success){
-			db.from('rooms').list().done(function(records){
-					console.log(records);
-				});
-		};
-	
-		return {
-			getAll : getAll
-				//return rooms;
-			};
-	});
-*/

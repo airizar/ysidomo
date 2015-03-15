@@ -7,7 +7,6 @@ angular.module('starter.controllers', [])
 
         var success1 = function(roomDevices) {
             $scope.devices.push({
-                //estabamos añadiendo un objeto entero y no el name
                 name: roomDevices[0].room,
                 devices: roomDevices
             });

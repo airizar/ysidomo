@@ -1,0 +1,9 @@
+[{
+    "sensor": "Grifo",
+    "room": "baño",
+    "caudal": "50"
+}, {
+    "sensor": "Grifo",
+    "room": "baño",
+    "caudal": "50"
+}]

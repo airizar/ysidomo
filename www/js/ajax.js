@@ -1,6 +1,6 @@
 angular.module('starter.ajax', [])
     .factory('ajax', function() {
-        var loadDeviceData = function(success) {
+        var loadDevicesData = function(success) {
             $.getJSON("json/deviceData.json", {}, function(deviceData) {
                 success(deviceData);
             });
@@ -12,27 +12,16 @@ angular.module('starter.ajax', [])
             });
         };
 
-        return {
-            loadDeviceData: loadDeviceData,
-            loadRoomsData: loadRoomsData
+        var loadWarningsData = function(success) {
+            $.getJSON("json/warningData.json", {}, function(warningData) {
+                success(warningData);
+            });
+        };
 
+        return {
+            loadDevicesData: loadDevicesData,
+            loadRoomsData: loadRoomsData,
+            loadWarningsData: loadWarningsData
         };
     });
-    /***********************************************************/
-    /**ESTO HAY QUE PONERLO EN LUGAR DE LOS PUTS DE DB.JS*******/
-    /**HABRA QUE AÑADIR EN APP LAS LLAMADAS A ESTAS FUNCIONES
-    /**DB.ADDDEVICES**///////////////////////////////////////////
-/*r addDevices = function(devices) {
-    db.onReady(function(e) {
-        for (var i = devices.length - 1; i >= 0; i--) {
-            db.put('devices', devices[i]);
-        }
-    });
-};
-var addRooms = function(rooms) {
-    db.onReady(function(e) {
-        for (var i = rooms.length - 1; i >= 0; i--) {
-            db.put('rooms', rooms[i]);
-        }
-    });
-};*/
+    
