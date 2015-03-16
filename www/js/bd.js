@@ -103,7 +103,19 @@ angular.module('starter.DB', [])
         var observeWarnings = function(observer) {
             observers.push(observer);
         };
-
+/*
+        setInterval(function(){
+            var event = new Event('newWarning');
+            event.data={
+                sensor: "Luz",
+                room: "Sala",
+                alert: "encendida",
+                status: true
+            }
+            this.dispatchEvent(event);
+            console.log("newWarning lanzado");
+        },10000);
+*/
         return {
             addWarnings: addWarnings,
             addDevices: addDevices,

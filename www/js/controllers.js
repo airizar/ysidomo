@@ -1,53 +1,110 @@
 angular.module('starter.controllers', [])
 
 ////////////////////////////////
-.controller('DevicesCtrl', ["$scope", "BD", "$stateParams", function($scope, BD, $stateParams) {
+.controller('TabsCtrl', ["$scope", "BD", "Warnings", function($scope, DB, Warnings) {
+    console.log("Loading TabsCtrl");
+
+    DB.getWarnings(function(warnings){
+        for(var i=0;i<warnings.length;i++){
+            Warnings.push(warnings[i]);
+        }
+        $scope.$apply(function(){
+            $scope.numWarnings = Warnings.getNumWarnings();
+
+        });
+    });
+
+  window.addEventListener('newWarning', function (e) {
+    console.log('Escuchado newWarning por TabCtrl');
+    Warnings.push(e.data);
+    $scope.$apply(function(){
+      $scope.numWarnings = Warnings.getNumWarnings();
+
+    });
+  }, false);
+
+    
+    //setTimeout(function(){console.log("cambio");
+    //  $scope.$apply(function(){$scope.numWarnings++;});},10000);
+}])
+
+.controller('DevicesCtrl', ["$scope", "BD", function($scope, DB) {
+    console.log("Loading DevicesCtrl");
     var rooms;
     var success = function(rooms) {
 
         var success1 = function(roomDevices) {
-            $scope.devices.push({
+            $scope.$apply(function(){
+                $scope.devices.push({
                 name: roomDevices[0].room,
                 devices: roomDevices
+            });
             });
         };
 
         $scope.devices = [];
         for (var i = rooms.length - 1; i >= 0; i--) {
 
-            BD.getRoomDevices(rooms[i].name, success1);
+            DB.getRoomDevices(rooms[i].name, success1);
 
         }
     };
-    BD.getRooms(success);
+    DB.getRooms(success);
 }])
 
-.controller('WarningsCtrl', ["$scope", "BD", function($scope, BD) {
-    //$scope.friends = Friends.all();
-
-    var notify = function(warnings) {
-        BD.getWarnings(function(warnings){
+.controller('WarningsCtrl', ["$scope", "BD", "Warnings", function($scope, DB, Warnings) {
+    console.log("Loading WarningsCtrl");
+/*    var notify = function(warnings) {
+        DB.getWarnings(function(warnings){
           for(var i=0; i<warnings.length; i++){
           var warning = warnings[i];           
-            $scope.warnings.push({
-                //estabamos añadiendo un objeto entero y no el name
+            $scope.$apply(function(){$scope.warnings.push({
                 sensor:  warning.sensor +" - " + warning.room,
                 wrnMsg: warning.alert + " - " + warning.status
+                });
             });
           }
             
             console.log(warnings.length);
-            $scope.numWarnings = warnings.length;
+           // $scope.numWarnings = warnings.length;
         });
         
-    };
-    $scope.warnings = [];
-    BD.observeWarnings({
+    };*/
+    $scope.warnings=[];
+    var warnings = Warnings.getWarnings();//[];
+    // DB.getWarnings(function(warnings){
+          for(var i=0; i<warnings.length; i++){
+          var warning = warnings[i];           
+            //$scope.$apply(function(){
+                $scope.warnings.push({
+                    sensor:  warning.sensor +" - " + warning.room,
+                    wrnMsg: warning.alert + " - " + warning.status
+                });
+            //});
+          }
+
+          window.addEventListener('newWarning', function (e) {
+            console.log('Escuchado newWarning por WarningCtrl');
+      $scope.warnings.push({
+                sensor:  e.data.sensor +" - " + e.data.room,
+                wrnMsg: e.data.alert + " - " + e.data.status
+              });
+  }, false);
+            
+            console.log(warnings.length);
+           // $scope.numWarnings = warnings.length;
+  //      });
+
+
+
+
+   /* DB.observeWarnings({
         notify : notify
-    });
+    });*/
 }])
 
 .controller('ActionsCtrl', ["$scope", "$stateParams", function($scope, $stateParams) {
+    console.log('ActionsCtrl loaded');
         // $scope.friend = Friends.get($stateParams.friendId);
     }])
     ///////////////////////////////
