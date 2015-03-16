@@ -35,7 +35,7 @@ angular.module('starter.DB', [])
 
         var addDevices = function(devices) {
             db.onReady(function(e) {
-                for (var i = devices.length - 1; i >= 0; i--) {
+                for (var i = devices.length - 1; i >= 0; i--) {z
                     db.put('devices', devices[i]).done(function() {
                         console.log(devices.length + ' sensores insertados');
                     });
@@ -48,7 +48,7 @@ angular.module('starter.DB', [])
             db.onReady(function(e) {
                 for (var i = rooms.length - 1; i >= 0; i--) {
                     db.put('rooms', rooms[i]).done(function() {
-                        console.log(rooms.length + ' habitaciones insertadas');
+                        console.log(rooms.length+' habitaciones insertadas');
                     });
                 };
             });
