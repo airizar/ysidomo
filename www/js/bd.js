@@ -35,21 +35,17 @@ angular.module('starter.DB', [])
         var addDevices = function(devices) {
 
             db.onReady(function(e) {
-                //for (var i = devices.length - 1; i >= 0; i--) {
-                    // db.put('devices', devices[i]).done(function() {
-                    //     console.log(devices.length + ' sensores insertados');
-                    // });
-                //}
                 db.put('devices', devices).done(function() {
-                         console.log(devices.length + ' sensores insertados');
-                     });
+                    console.log(devices.length + ' sensores insertados');
+                    var event = new Event('changeDevices');
+                    this.dispatchEvent(event);
+                });
             });
         };
 
 
         var addRooms = function(rooms) {
             db.onReady(function(e) {
-                //for (var i = rooms.length - 1; i >= 0; i--) {
                     db.put('rooms', rooms).done(function() {
                         console.log(rooms.length + ' habitaciones insertadas');
                     });
@@ -59,22 +55,22 @@ angular.module('starter.DB', [])
 
         var addWarnings = function(warnings) {
             db.onReady(function(e) {
-                //for (var i = warnings.length - 1; i >= 0; i--) {
-                    db.put('warnings', warnings).done(function() {
-                        console.log(warnings.length + ' warnings insertados');
-                    });
-                //}
+                db.put('warnings', warnings).done(function() {
+                    console.log(warnings.length + ' warnings insertados');
+                    var event = new Event('changeWarnings');
+                    this.dispatchEvent(event);
+                });
             });
         };
 
         var getRooms = function(success) {
-            db.from('rooms').list().done(function(records) {
+            db.onReady(db.from('rooms').list().done(function(records) {
                 //Se nos habia perdido la llamada a success por ahi
                 console.log('Listing rooms...');
                 success(records);
             }).fail(function() {
                 console.log('No rooms');
-            });
+            }));
         };
 
         var getWarnings = function(success) {
@@ -106,19 +102,19 @@ angular.module('starter.DB', [])
         var observeWarnings = function(observer) {
             observers.push(observer);
         };
-/*
-        setInterval(function(){
-            var event = new Event('newWarning');
-            event.data={
-                sensor: "Luz",
-                room: "Sala",
-                alert: "encendida",
-                status: true
-            }
-            this.dispatchEvent(event);
-            console.log("newWarning lanzado");
-        },10000);
-*/
+        /*
+                setInterval(function(){
+                    var event = new Event('newWarning');
+                    event.data={
+                        sensor: "Luz",
+                        room: "Sala",
+                        alert: "encendida",
+                        status: true
+                    }
+                    this.dispatchEvent(event);
+                    console.log("newWarning lanzado");
+                },10000);
+        */
         return {
             addWarnings: addWarnings,
             addDevices: addDevices,

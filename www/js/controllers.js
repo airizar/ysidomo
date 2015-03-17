@@ -4,26 +4,32 @@ angular.module('starter.controllers', [])
 .controller('TabsCtrl', ["$scope", "BD", "Warnings", function($scope, DB, Warnings) {
     console.log("Loading TabsCtrl");
 
-    DB.getWarnings(function(warnings){
-        for(var i=0;i<warnings.length;i++){
+    var success = function(warnings) {
+        for (var i = 0; i < warnings.length; i++) {
             Warnings.push(warnings[i]);
         }
-        $scope.$apply(function(){
+        $scope.$apply(function() {
             $scope.numWarnings = Warnings.getNumWarnings();
 
         });
-    });
+    };
 
-  window.addEventListener('newWarning', function (e) {
-    console.log('Escuchado newWarning por TabCtrl');
-    Warnings.push(e.data);
-    $scope.$apply(function(){
-      $scope.numWarnings = Warnings.getNumWarnings();
+    DB.getWarnings(success);
 
-    });
-  }, false);
+    window.addEventListener('newWarning', function(e) {
+        console.log('Escuchado newWarning por TabCtrl');
+        Warnings.push(e.data);
+        $scope.$apply(function() {
+            $scope.numWarnings = Warnings.getNumWarnings();
 
-    
+        });
+    }, false);
+    window.addEventListener('changeWarnings', function(e) {
+        console.log('Escuchado changeWarning por TabCtrl');
+        DB.getWarnings(success);
+    }, false);
+
+
     //setTimeout(function(){console.log("cambio");
     //  $scope.$apply(function(){$scope.numWarnings++;});},10000);
 }])
@@ -32,13 +38,15 @@ angular.module('starter.controllers', [])
     console.log("Loading DevicesCtrl");
     var rooms;
     var success = function(rooms) {
+        console.log("Success: getRooms");
 
         var success1 = function(roomDevices) {
-            $scope.$apply(function(){
+            $scope.$apply(function() {
+                console.log("Insertamos devices en room");
                 $scope.devices.push({
-                name: roomDevices[0].room,
-                devices: roomDevices
-            });
+                    name: roomDevices[0].room,
+                    devices: roomDevices
+                });
             });
         };
 
@@ -50,61 +58,66 @@ angular.module('starter.controllers', [])
         }
     };
     DB.getRooms(success);
+
+    window.addEventListener('changeDevices', function(e) {
+        console.log('Escuchado evento changeRooms por DevicesCtrl');
+        DB.getRooms(success);
+    }, false);
 }])
 
 .controller('WarningsCtrl', ["$scope", "BD", "Warnings", function($scope, DB, Warnings) {
     console.log("Loading WarningsCtrl");
-/*    var notify = function(warnings) {
-        DB.getWarnings(function(warnings){
-          for(var i=0; i<warnings.length; i++){
-          var warning = warnings[i];           
-            $scope.$apply(function(){$scope.warnings.push({
-                sensor:  warning.sensor +" - " + warning.room,
-                wrnMsg: warning.alert + " - " + warning.status
-                });
-            });
-          }
-            
-            console.log(warnings.length);
-           // $scope.numWarnings = warnings.length;
-        });
-        
-    };*/
-    $scope.warnings=[];
-    var warnings = Warnings.getWarnings();//[];
-    // DB.getWarnings(function(warnings){
-          for(var i=0; i<warnings.length; i++){
-          var warning = warnings[i];           
-            //$scope.$apply(function(){
-                $scope.warnings.push({
+    /*    var notify = function(warnings) {
+            DB.getWarnings(function(warnings){
+              for(var i=0; i<warnings.length; i++){
+              var warning = warnings[i];           
+                $scope.$apply(function(){$scope.warnings.push({
                     sensor:  warning.sensor +" - " + warning.room,
                     wrnMsg: warning.alert + " - " + warning.status
+                    });
                 });
-            //});
-          }
-
-          window.addEventListener('newWarning', function (e) {
-            console.log('Escuchado newWarning por WarningCtrl');
-      $scope.warnings.push({
-                sensor:  e.data.sensor +" - " + e.data.room,
-                wrnMsg: e.data.alert + " - " + e.data.status
-              });
-  }, false);
+              }
+                
+                console.log(warnings.length);
+               // $scope.numWarnings = warnings.length;
+            });
             
-            console.log(warnings.length);
-           // $scope.numWarnings = warnings.length;
-  //      });
+        };*/
+    $scope.warnings = [];
+    var warnings = Warnings.getWarnings(); //[];
+    // DB.getWarnings(function(warnings){
+    for (var i = 0; i < warnings.length; i++) {
+        var warning = warnings[i];
+        //$scope.$apply(function(){
+        $scope.warnings.push({
+            sensor: warning.sensor + " - " + warning.room,
+            wrnMsg: warning.alert + " - " + warning.status
+        });
+        //});
+    }
+
+    window.addEventListener('newWarning', function(e) {
+        console.log('Escuchado newWarning por WarningCtrl');
+        $scope.warnings.push({
+            sensor: e.data.sensor + " - " + e.data.room,
+            wrnMsg: e.data.alert + " - " + e.data.status
+        });
+    }, false);
+
+    console.log(warnings.length);
+    // $scope.numWarnings = warnings.length;
+    //      });
 
 
 
 
-   /* DB.observeWarnings({
-        notify : notify
-    });*/
+    /* DB.observeWarnings({
+         notify : notify
+     });*/
 }])
 
 .controller('ActionsCtrl', ["$scope", "$stateParams", function($scope, $stateParams) {
-    console.log('ActionsCtrl loaded');
+        console.log('ActionsCtrl loaded');
         // $scope.friend = Friends.get($stateParams.friendId);
     }])
     ///////////////////////////////

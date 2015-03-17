@@ -5,9 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'starter.DB','starter.ajax'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'starter.DB', 'starter.ajax'])
 
-.run(function($ionicPlatform,BD,ajax) {
+.run(function($ionicPlatform, BD, ajax) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -19,18 +19,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             StatusBar.styleDefault();
         }
     });
-       //Obtener los datos mediante ajax
-    ajax.loadRoomsData(function(rooms){
-        BD.addRooms(rooms)
-    });
-    
-    ajax.loadDevicesData(function(devices){
-        BD.addDevices(devices)
+    //Obtener los datos mediante ajax
+    ajax.loadRoomsData(function(rooms) {
+        BD.addRooms(rooms);
     });
 
-    ajax.loadWarningsData(function(warnings){
-        BD.addWarnings(warnings)
+    ajax.loadDevicesData(function(devices) {
+        BD.addDevices(devices);
     });
+
+    ajax.loadWarningsData(function(warnings) {
+        BD.addWarnings(warnings);
+    });
+
 })
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
