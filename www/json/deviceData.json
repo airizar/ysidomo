@@ -1,10 +1,10 @@
 [{
-    "name": "Luz",
+    "name": "Luz1",
     "room": "Sala",
     "type": "binario",
     "status": true
 }, {
-    "name": "Persiana",
+    "name": "Persiana1",
     "room": "Sala",
     "type": "decimal",
     "status": 10
@@ -14,22 +14,22 @@
     "type": "binario",
     "status": false
 }, {
-    "name": "Luz",
+    "name": "Luz2",
     "room": "Baño",
     "type": "binario",
     "status": true
 }, {
-    "name": "Persiana",
+    "name": "Persiana2",
     "room": "Baño",
     "type": "decimal",
     "status": 10
 }, {
-    "name": "Grifo",
+    "name": "Grifo1",
     "room": "Baño",
     "type": "decimal",
     "status": 50
 }, {
-    "name": "Grifo",
+    "name": "Grifo2",
     "room": "",
     "type": "decimal",
     "status": 50
