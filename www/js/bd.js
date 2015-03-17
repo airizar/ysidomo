@@ -28,39 +28,42 @@ angular.module('starter.DB', [])
                 autoIncrement: true
             }]
         };
-
         var db = new ydn.db.Storage('ysidomo', schema);
 
-
+        db.clear(['devices','warnings','rooms']);
 
         var addDevices = function(devices) {
+
             db.onReady(function(e) {
-                for (var i = devices.length - 1; i >= 0; i--) {
-                    db.put('devices', devices[i]).done(function() {
-                        console.log(devices.length + ' sensores insertados');
-                    });
-                };
+                //for (var i = devices.length - 1; i >= 0; i--) {
+                    // db.put('devices', devices[i]).done(function() {
+                    //     console.log(devices.length + ' sensores insertados');
+                    // });
+                //}
+                db.put('devices', devices).done(function() {
+                         console.log(devices.length + ' sensores insertados');
+                     });
             });
         };
 
 
         var addRooms = function(rooms) {
             db.onReady(function(e) {
-                for (var i = rooms.length - 1; i >= 0; i--) {
-                    db.put('rooms', rooms[i]).done(function() {
+                //for (var i = rooms.length - 1; i >= 0; i--) {
+                    db.put('rooms', rooms).done(function() {
                         console.log(rooms.length + ' habitaciones insertadas');
                     });
-                };
+               // }
             });
         };
 
         var addWarnings = function(warnings) {
             db.onReady(function(e) {
-                for (var i = warnings.length - 1; i >= 0; i--) {
-                    db.put('warnings', warnings[i]).done(function() {
+                //for (var i = warnings.length - 1; i >= 0; i--) {
+                    db.put('warnings', warnings).done(function() {
                         console.log(warnings.length + ' warnings insertados');
                     });
-                };
+                //}
             });
         };
 
