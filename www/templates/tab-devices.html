@@ -4,7 +4,7 @@
             <div class="list" ng-repeat="device in devices">
                 <div class="item item-divider">
                     {{device.name}}
-                    <a class="item-icon-right"><i class="icon ion-plus"></i></a>
+                    <a class="item-icon-right" href="#/tab/devices/{{device.name}}"><i class="icon ion-plus"></i></a>
                 </div>
                     
                     <ion-item class="item-toggle" ng-repeat="roomDevice in device.devices">

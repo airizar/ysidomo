@@ -20,7 +20,7 @@
     "status": true
 }, {
     "name": "Persiana2",
-    "room": "Baño",
+    "room": "",
     "type": "decimal",
     "status": 10
 }, {
@@ -30,6 +30,21 @@
     "status": 50
 }, {
     "name": "Grifo2",
+    "room": "",
+    "type": "decimal",
+    "status": 50
+}, {
+    "name": "Persiana3",
+    "room": "",
+    "type": "decimal",
+    "status": 50
+}, {
+    "name": "Persiana4",
+    "room": "",
+    "type": "decimal",
+    "status": 50
+}, {
+    "name": "Persiana5",
     "room": "",
     "type": "decimal",
     "status": 50

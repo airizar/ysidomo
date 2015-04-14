@@ -94,12 +94,24 @@ angular.module('starter.DB', [])
             }
         };
 
+        var getDevicesWithoutRoom = function(success) {
+            room="";
+                db.from('devices').where('room', '=', room).list().done(function(records) {
+                    success(records);
+                });
+            };
+
         var notifyWarnings = function() {
             for (var i = 0; i < observers.length; i++) {
                 observers[i].notify();
             }
         };
-
+ 
+         var setRoom=function(device,roomName){
+            
+        
+            db.from('devices', '=', device.id).patch({'room': roomName});
+         };
         var observeWarnings = function(observer) {
             observers.push(observer);
         };
@@ -123,6 +135,8 @@ angular.module('starter.DB', [])
             getRooms: getRooms,
             getWarnings: getWarnings,
             getRoomDevices: getRoomDevices,
+            getDevicesWithoutRoom:getDevicesWithoutRoom,
+            setRoom:setRoom,
             observeWarnings: observeWarnings,
             notifyWarnings: notifyWarnings
         };

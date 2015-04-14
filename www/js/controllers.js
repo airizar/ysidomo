@@ -35,7 +35,16 @@ angular.module('starter.controllers', [])
 }])
 
 .controller('DevicesCtrl', ["$scope", "BD", function($scope, DB) {
+   
     console.log("Loading DevicesCtrl");
+  //   $scope.data = {
+  //   showDelete: true
+  // };
+  // $scope.onItemDelete = function(item) {
+  //   alert("onItemDelete");
+  //   $scope.devices.splice($scope.devices.indexOf(item), 1);
+  // };
+  
     var rooms;
     var success = function(rooms) {
         console.log("Success: getRooms");
@@ -120,6 +129,21 @@ angular.module('starter.controllers', [])
         console.log('ActionsCtrl loaded');
         // $scope.friend = Friends.get($stateParams.friendId);
     }])
-    ///////////////////////////////
+.controller('DevicesSelectCtrl', ["$scope","$stateParams",  "BD",function($scope,$stateParams, DB) {
+   console.log("11111111111111111111111111111111Loading DevicesSelectCtrl " );
+    $scope.roomName=$stateParams.roomName;
+    $scope.devicesWithoutRoom=[];
+     var devicesWithoutRoom;
+     var success = function(devices) {
+         console.log("Success: getRooms devicesWithoutRoom");
+         $scope.devicesWithoutRoom=devices;
+         
+     };
+     DB.getDevicesWithoutRoom(success);
+     $scope.setRoom = function(device) {
+        DB.setRoom(device,$stateParams.roomName);
+    };
+}])
+
 
 ;

@@ -1,0 +1,14 @@
+<ion-view view-title="{{roomName}}">
+    <ion-content class="padding">
+      
+       <ul class="list">
+            <li class="item item-checkbox" ng-repeat="device in devicesWithoutRoom">
+                <label class="checkbox">
+                    <input type="checkbox" ng-cloak ng-click="setRoom(device)">
+                </label>
+                {{device.name}}
+            </li>
+            
+        </ul>  
+    </ion-content>
+</ion-view>

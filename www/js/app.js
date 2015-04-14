@@ -61,6 +61,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             }
         }
     })
+    .state('tab.devices-select', {
+        url: '/devices/:roomName',
+        views: {
+            'tab-devices': {
+                templateUrl: 'templates/devices-select.html',
+                controller: 'DevicesSelectCtrl'
+            }
+        }
+    })
 
     .state('tab.warnings', {
         url: '/warnings',
@@ -81,7 +90,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             }
         }
     });
-
 
 
     // if none of the above states are matched, use this as the fallback
