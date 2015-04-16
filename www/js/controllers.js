@@ -36,7 +36,7 @@ angular.module('starter.controllers', [])
 .controller('DevicesCtrl', ["$scope", "BD", function($scope, DB) {
 
     console.log("Loading DevicesCtrl");
-
+    $scope.showHiddenClass = "ysi-hidden";
     var rooms;
     var devices;
     var success = function(rooms) {
@@ -64,13 +64,18 @@ angular.module('starter.controllers', [])
 
 
     /*Quitar un sensor de una habitación: en pantalla y BD*/
-    $scope.data = {
-        showDelete: false
+    $scope.showHiddenDelete = function() {
+        if ($scope.showHiddenClass == 'ysi-hidden') {
+            $scope.showHiddenClass = 'ysi-show';
+        } else {
+            $scope.showHiddenClass = 'ysi-hidden';
+        }
     };
-     $scope.showToggle = function(roomDevice) {
+    $scope.showToggle = function(roomDevice) {
         console.log(roomDevice);
-        return roomDevice.type==='binario';
+        return roomDevice.type === 'binario';
     };
+
 
     $scope.onItemDelete = function(roomDevicesList, roomDevice) {
         alert("onItemDelete ");

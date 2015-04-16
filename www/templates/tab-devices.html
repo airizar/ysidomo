@@ -4,7 +4,7 @@
             <div class="item-divider">
                 <ion-header-bar>
                     <div class="buttons">
-                        <button class="button button-icon icon ion-minus-circled" ng-click="data.showDelete = !data.showDelete; data.showReorder = false"></button>
+                        <button class="button button-icon icon ion-minus-circled" ng-click="showHiddenDelete()"></button>
                     </div>
                     <h1 class="title">{{device.name}}</h1>
                     <div class="buttons">
@@ -15,8 +15,8 @@
            < <div class="list">
                 <div class="item" ng-repeat="roomDevice in device.devices">
 
-               <div class="buttons">
-                        <button class="button button-icon icon ion-minus-circled" show="data.showDelete" ng-click="onItemDelete(device,roomDevice)"></button>
+               <div class="buttons {{showHiddenClass}}">
+                        <button class="button button-icon icon ion-minus-circled  hidden" show="data.showDelete" ng-click="onItemDelete(device,roomDevice)"></button>
                     </div>
                     {{roomDevice.name}}
 
