@@ -67,10 +67,15 @@ angular.module('starter.controllers', [])
     $scope.data = {
         showDelete: false
     };
+     $scope.showToggle = function(roomDevice) {
+        console.log(roomDevice);
+        return roomDevice.type==='binario';
+    };
+
     $scope.onItemDelete = function(roomDevicesList, roomDevice) {
         alert("onItemDelete ");
         $scope.devices[$scope.devices.indexOf(roomDevicesList)].devices.splice($scope.devices[$scope.devices.indexOf(roomDevicesList)].devices.indexOf(roomDevice), 1);
-        DB.deleteDeviceFromRoom(roomDevice, deleteSuccess);
+        DB.deleteDeviceFromRoom(roomDevice);
 
 
     };

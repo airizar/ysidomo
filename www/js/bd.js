@@ -120,7 +120,6 @@ angular.module('starter.DB', [])
         };
         var deleteDeviceFromRoom = function(device) {
             roomName = '';
-
             db.from('devices', '=', device.id).patch({
                 'room': roomName
             });
