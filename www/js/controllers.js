@@ -75,6 +75,14 @@ angular.module('starter.controllers', [])
         console.log(roomDevice);
         return roomDevice.type === 'binario';
     };
+    $scope.showRange = function(roomDevice) {
+        console.log(roomDevice);
+        return roomDevice.type==='decimal';
+    };
+    $scope.showInfo = function(roomDevice) {
+        console.log(roomDevice);
+        return roomDevice.type==='info';
+    };
 
 
     $scope.onItemDelete = function(roomDevicesList, roomDevice) {

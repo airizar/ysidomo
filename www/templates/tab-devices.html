@@ -26,10 +26,13 @@
                             <div class="handle"></div>
                         </div>
                     </label>
-                    <div class="item range range-positive" ng-if="!showToggle(roomDevice)">
+                    <div class="item range range-positive" ng-if="showRange(roomDevice)">
                         <i class="icon ion-ios7-sunny-outline"></i>
                         <input type="range" name="volume" min="0" max="100" value="33">
                         <i class="icon ion-ios7-sunny"></i>
+                    </div>
+                    <div class="item range range-positive" ng-if="showInfo(roomDevice)">
+                        <span class="infoValue">{{roomDevice.status}}</span>
                     </div>
                 </div>
             </div>
