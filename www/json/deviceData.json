@@ -48,4 +48,9 @@
     "room": "",
     "type": "decimal",
     "status": 50
+}, {
+    "name": "Temperatura",
+    "room": "Sala",
+    "type": "info",
+    "status": "21º"
 }]

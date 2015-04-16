@@ -1,9 +1,10 @@
 [{
     "sensor": "Grifo",
     "room": "baño",
-    "caudal": "50"
+    "alert": "caudal",
+    "status": "50"
 }, {
-    "sensor": "Grifo",
-    "room": "baño",
-    "caudal": "50"
+    "sensor": "Temperatura",
+    "room": "Sala",
+    "caudal": "21º"
 }]
