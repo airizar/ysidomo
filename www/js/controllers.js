@@ -1,6 +1,5 @@
 angular.module('starter.controllers', [])
 
-////////////////////////////////
 .controller('TabsCtrl', ["$scope", "BD", "Warnings", function($scope, DB, Warnings) {
     console.log("Loading TabsCtrl");
 
@@ -35,17 +34,11 @@ angular.module('starter.controllers', [])
 }])
 
 .controller('DevicesCtrl', ["$scope", "BD", function($scope, DB) {
-   
+
     console.log("Loading DevicesCtrl");
-  //   $scope.data = {
-  //   showDelete: true
-  // };
-  // $scope.onItemDelete = function(item) {
-  //   alert("onItemDelete");
-  //   $scope.devices.splice($scope.devices.indexOf(item), 1);
-  // };
-  
+
     var rooms;
+    var devices;
     var success = function(rooms) {
         console.log("Success: getRooms");
 
@@ -65,13 +58,29 @@ angular.module('starter.controllers', [])
             DB.getRoomDevices(rooms[i].name, success1);
 
         }
+
     };
     DB.getRooms(success);
 
+
+    /*Quitar un sensor de una habitación: en pantalla y BD*/
+    $scope.data = {
+        showDelete: false
+    };
+    $scope.onItemDelete = function(roomDevicesList, roomDevice) {
+        alert("onItemDelete ");
+        $scope.devices[$scope.devices.indexOf(roomDevicesList)].devices.splice($scope.devices[$scope.devices.indexOf(roomDevicesList)].devices.indexOf(roomDevice), 1);
+        DB.deleteDeviceFromRoom(roomDevice, deleteSuccess);
+
+
+    };
     window.addEventListener('changeDevices', function(e) {
         console.log('Escuchado evento changeRooms por DevicesCtrl');
         DB.getRooms(success);
     }, false);
+
+
+
 }])
 
 .controller('WarningsCtrl', ["$scope", "BD", "Warnings", function($scope, DB, Warnings) {
@@ -112,7 +121,6 @@ angular.module('starter.controllers', [])
             wrnMsg: e.data.alert + " - " + e.data.status
         });
     }, false);
-
     console.log(warnings.length);
     // $scope.numWarnings = warnings.length;
     //      });
@@ -126,24 +134,27 @@ angular.module('starter.controllers', [])
 }])
 
 .controller('ActionsCtrl', ["$scope", "$stateParams", function($scope, $stateParams) {
-        console.log('ActionsCtrl loaded');
-        // $scope.friend = Friends.get($stateParams.friendId);
-    }])
-.controller('DevicesSelectCtrl', ["$scope","$stateParams",  "BD",function($scope,$stateParams, DB) {
-   console.log("11111111111111111111111111111111Loading DevicesSelectCtrl " );
-    $scope.roomName=$stateParams.roomName;
-    $scope.devicesWithoutRoom=[];
-     var devicesWithoutRoom;
-     var success = function(devices) {
-         console.log("Success: getRooms devicesWithoutRoom");
-         $scope.devicesWithoutRoom=devices;
-         
-     };
-     DB.getDevicesWithoutRoom(success);
-     $scope.setRoom = function(device) {
-        DB.setRoom(device,$stateParams.roomName);
-    };
+    console.log('ActionsCtrl loaded');
+    // $scope.friend = Friends.get($stateParams.friendId);
 }])
 
+.controller('DevicesSelectCtrl', ["$scope", "$stateParams", "BD", function($scope, $stateParams, DB) {
+    console.log("Loading DevicesSelectCtrl ");
+    $scope.roomName = $stateParams.roomName;
+    $scope.devicesWithoutRoom = [];
+    var devicesWithoutRoom;
+    var success = function(devices) {
+        console.log("Success: getRooms devicesWithoutRoom");
+        $scope.devicesWithoutRoom = devices;
 
-;
+    };
+    DB.getDevicesWithoutRoom(success);
+
+    $scope.setRoom = function(device) {
+        var success = function(result) {
+            console.log("set room success: " + result);
+        };
+        DB.setRoom(device, $stateParams.roomName, success);
+    };
+
+}]);

@@ -30,7 +30,7 @@ angular.module('starter.DB', [])
         };
         var db = new ydn.db.Storage('ysidomo', schema);
 
-        db.clear(['devices','rooms','warnings']);
+        db.clear(['devices', 'rooms', 'warnings']);
 
 
         var addDevices = function(devices) {
@@ -48,9 +48,9 @@ angular.module('starter.DB', [])
 
         var addRooms = function(rooms) {
             db.onReady(function(e) {
-                    db.put('rooms', rooms).done(function() {
-                        console.log(rooms.length + ' habitaciones insertadas');
-                    });
+                db.put('rooms', rooms).done(function() {
+                    console.log(rooms.length + ' habitaciones insertadas');
+                });
             });
         };
 
@@ -95,23 +95,37 @@ angular.module('starter.DB', [])
         };
 
         var getDevicesWithoutRoom = function(success) {
-            room="";
-                db.from('devices').where('room', '=', room).list().done(function(records) {
-                    success(records);
-                });
-            };
+            room = "";
+            db.from('devices').where('room', '=', room).list().done(function(records) {
+                success(records);
+            });
+        };
 
         var notifyWarnings = function() {
             for (var i = 0; i < observers.length; i++) {
                 observers[i].notify();
             }
         };
- 
-         var setRoom=function(device,roomName){
-            
-        
-            db.from('devices', '=', device.id).patch({'room': roomName});
-         };
+
+        var setRoom = function(device, roomName, success) {
+
+
+            db.from('devices', '=', device.id).patch({
+                'room': roomName
+            }).done(function(result) {
+                success(result);
+                var event = new Event('changeDevices');
+                this.dispatchEvent(event);
+            });
+        };
+        var deleteDeviceFromRoom = function(device) {
+            roomName = '';
+
+            db.from('devices', '=', device.id).patch({
+                'room': roomName
+            });
+
+        };
         var observeWarnings = function(observer) {
             observers.push(observer);
         };
@@ -135,8 +149,9 @@ angular.module('starter.DB', [])
             getRooms: getRooms,
             getWarnings: getWarnings,
             getRoomDevices: getRoomDevices,
-            getDevicesWithoutRoom:getDevicesWithoutRoom,
-            setRoom:setRoom,
+            getDevicesWithoutRoom: getDevicesWithoutRoom,
+            setRoom: setRoom,
+            deleteDeviceFromRoom: deleteDeviceFromRoom,
             observeWarnings: observeWarnings,
             notifyWarnings: notifyWarnings
         };
