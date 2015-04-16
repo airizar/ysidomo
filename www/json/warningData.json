@@ -6,5 +6,6 @@
 }, {
     "sensor": "Temperatura",
     "room": "Sala",
-    "caudal": "21º"
+    "alert": "Temperatura excesiva",
+    "status": "21º"
 }]
