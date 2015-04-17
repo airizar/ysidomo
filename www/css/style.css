@@ -37,7 +37,7 @@ label.toggle {
 }
 
 .w-20{
-    width: 20%;
+    width: 15%;
 }
 
 
@@ -45,4 +45,6 @@ label.toggle {
     width: 80%;
 }
 
-
+.ysi-minus-red{
+    color: #F00;
+}
