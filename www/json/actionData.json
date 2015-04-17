@@ -1,0 +1,27 @@
+[{
+    "name": "Salir de casa",
+    "devices": [{
+        "name": "Luz1",
+        "room": "Sala",
+        "type": "binario",
+        "status": false
+    }, {
+        "name": "Persiana1",
+        "room": "Sala",
+        "type": "decimal",
+        "status": 0
+    }]
+}, {
+    "name": "LLegar a casa",
+    "devices": [{
+        "name": "Luz1",
+        "room": "Sala",
+        "type": "binario",
+        "status": true
+    }, {
+        "name": "Persiana1",
+        "room": "Sala",
+        "type": "decimal",
+        "status": 70
+    }]
+}]

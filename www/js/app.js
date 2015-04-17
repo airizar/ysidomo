@@ -20,15 +20,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
     });
     //Obtener los datos mediante ajax
-    ajax.loadRoomsData(function(rooms) {
+    ajax.loadRoomsData(function (rooms) {
         BD.addRooms(rooms);
     });
 
-    ajax.loadDevicesData(function(devices) {
+    ajax.loadDevicesData(function (devices) {
         BD.addDevices(devices);
     });
 
-    ajax.loadWarningsData(function(warnings) {
+    ajax.loadActionsData(function (actions) {
+        BD.addActions(actions);
+    });
+
+    ajax.loadWarningsData(function (warnings) {
         BD.addWarnings(warnings);
     });
 
