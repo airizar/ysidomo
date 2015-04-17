@@ -84,7 +84,8 @@ angular.module('starter.DB', [])
                 success(records);
             }).fail(function() {
                 console.log('No rooms');
-            });});
+            });
+        });
         };
 
         var getWarnings = function(success) {
