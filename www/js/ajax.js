@@ -18,10 +18,18 @@ angular.module('starter.ajax', [])
             });
         };
 
+        var loadActionsData = function(success) {
+            $.getJSON("json/actionData.json", {}, function(actionsData) {
+                console.log("GVcuijgkjbkgivkljbkljhkigb");
+                success(actionsData);
+            });
+        };
+
         return {
             loadDevicesData: loadDevicesData,
             loadRoomsData: loadRoomsData,
-            loadWarningsData: loadWarningsData
+            loadWarningsData: loadWarningsData,
+            loadActionsData: loadActionsData
         };
     });
     

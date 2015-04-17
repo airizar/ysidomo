@@ -134,10 +134,12 @@ angular.module('starter.controllers', [])
 
     window.addEventListener('newWarning', function(e) {
         console.log('Escuchado newWarning por WarningCtrl');
+        //$scope.$apply(function(){
         $scope.warnings.push({
             sensor: e.data.sensor + " - " + e.data.room,
             wrnMsg: e.data.alert + " - " + e.data.status
         });
+        //});
     }, false);
     console.log(warnings.length);
     // $scope.numWarnings = warnings.length;

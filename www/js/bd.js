@@ -26,11 +26,15 @@ angular.module('starter.DB', [])
                 name: 'warnings',
                 keyPath: 'id',
                 autoIncrement: true
+            }, {
+                name: 'actions',
+                keyPath: 'id',
+                autoIncrement: true
             }]
         };
         var db = new ydn.db.Storage('ysidomo', schema);
 
-        db.clear(['devices', 'rooms', 'warnings']);
+        db.clear(['devices', 'rooms', 'warnings', 'actions']);
 
 
         var addDevices = function(devices) {
@@ -64,8 +68,17 @@ angular.module('starter.DB', [])
             });
         };
 
+        var addActions = function(actions) {
+            db.onReady(function(e) {
+                db.put('actions', actions).done(function() {
+                    console.log(actions.length + ' actions insertados');
+                });
+            });
+        };
+
         var getRooms = function(success) {
-            db.onReady(function(e){db.from('rooms').list().done(function(records) {
+            db.onReady(function (e) {
+                db.from('rooms').list().done(function(records) {
                 //Se nos habia perdido la llamada a success por ahi
                 console.log('Listing rooms...');
                 success(records);
@@ -129,23 +142,27 @@ angular.module('starter.DB', [])
         var observeWarnings = function(observer) {
             observers.push(observer);
         };
-        /*
+
+        //Simular nuevos warnings 
+        
+
                 setInterval(function(){
                     var event = new Event('newWarning');
                     event.data={
-                        sensor: "Luz",
-                        room: "Sala",
-                        alert: "encendida",
-                        status: true
-                    }
+                        sensor: "Temperatura",
+                        room: "Baño",
+                        alert: "Temperatura",
+                        status: "25ºtrue"
+                    };
                     this.dispatchEvent(event);
                     console.log("newWarning lanzado");
                 },10000);
-        */
+        
         return {
             addWarnings: addWarnings,
             addDevices: addDevices,
             addRooms: addRooms,
+            addActions: addActions,
             getRooms: getRooms,
             getWarnings: getWarnings,
             getRoomDevices: getRoomDevices,

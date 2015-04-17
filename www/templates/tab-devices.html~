@@ -12,32 +12,38 @@
                     </div>
                 </ion-header-bar>
             </div>
+<<<<<<< HEAD
             < <div class="list ysi-list">
                 <div class="item ysi-item" ng-repeat="roomDevice in device.devices">
-                    <div class="buttons w-20 {{showHiddenClass}}">
+                    <div class="buttons">
+                        <button class="button button-icon icon ion-minus-circled" show="data.showDelete" ng-click="onItemDelete(device,roomDevice)"></button>
+=======
+           < <div class="list">
+                <div class="item" ng-repeat="roomDevice in device.devices">
+
+               <div class="buttons {{showHiddenClass}}">
                         <button class="button button-icon icon ion-minus-circled  hidden" show="data.showDelete" ng-click="onItemDelete(device,roomDevice)"></button>
+>>>>>>> 8b396e7af383b3a017c638a3215a99c6ef9cd706
                     </div>
-                    <div class="w-80">
-                        {{roomDevice.name}}
-                        <label class="toggle float-right" ng-if="showToggle(roomDevice)">
-                            <input type="checkbox" ng-model="roomDevice.status">
-                            <div class="track">
-                                <div class="handle"></div>
-                            </div>
-                        </label>
-                        <div class="item range range-positive float-right" ng-if="showRange(roomDevice)">
-                            <!--<i class="icon ion-ios7-sunny-outline"></i>-->
-                            <span class="minMax">min</span>
-                            <input type="range" name="volume" min="0" max="100" value="33">
-                            <span class="minMax">Max</span>
-                            <!--<i class="icon ion-ios7-sunny"></i>-->
+                    {{roomDevice.name}}
+                    <label class="toggle" ng-if="showToggle(roomDevice)">
+                        <input type="checkbox" ng-model="roomDevice.status">
+                        <div class="track">
+                            <div class="handle"></div>
                         </div>
-                        <div class="item range range-positive float-right" ng-if="showInfo(roomDevice)">
-                            <span class="infoValue">{{roomDevice.status}}</span>
-                        </div>
+                    </label>
+                    <div class="item range range-positive" ng-if="showRange(roomDevice)">
+                        <!--<i class="icon ion-ios7-sunny-outline"></i>-->
+                        <span class="minMax">min</span>
+                        <input type="range" name="volume" min="0" max="100" value="33">
+                        <span class="minMax">Max</span>
+                        <!--<i class="icon ion-ios7-sunny"></i>-->
+                    </div>
+                    <div class="item range range-positive" ng-if="showInfo(roomDevice)">
+                        <span class="infoValue">{{roomDevice.status}}</span>
                     </div>
                 </div>
-        </div>
+            </div>
         <!--            <ion-list show-delete="data.showDelete">
                 <ion-item class="item-toggle item-remove-animate" item="item" ng-repeat="roomDevice in device.devices">
                     {{roomDevice.name}}
