@@ -77,11 +77,11 @@ angular.module('starter.controllers', [])
     };
     $scope.showRange = function(roomDevice) {
         console.log(roomDevice);
-        return roomDevice.type==='decimal';
+        return roomDevice.type === 'decimal';
     };
     $scope.showInfo = function(roomDevice) {
         console.log(roomDevice);
-        return roomDevice.type==='info';
+        return roomDevice.type === 'info';
     };
 
 
@@ -134,13 +134,14 @@ angular.module('starter.controllers', [])
 
     window.addEventListener('newWarning', function(e) {
         console.log('Escuchado newWarning por WarningCtrl');
-        //$scope.$apply(function(){
-        $scope.warnings.push({
-            sensor: e.data.sensor + " - " + e.data.room,
-            wrnMsg: e.data.alert + " - " + e.data.status
+        $scope.$apply(function() {
+            $scope.warnings.push({
+                sensor: e.data.sensor + " - " + e.data.room,
+                wrnMsg: e.data.alert + " - " + e.data.status
+            });
         });
-        //});
     }, false);
+
     console.log(warnings.length);
     // $scope.numWarnings = warnings.length;
     //      });

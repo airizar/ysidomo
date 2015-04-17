@@ -152,7 +152,7 @@ angular.module('starter.DB', [])
                         sensor: "Temperatura",
                         room: "Baño",
                         alert: "Temperatura",
-                        status: "25ºtrue"
+                        status: "25º"
                     };
                     this.dispatchEvent(event);
                     console.log("newWarning lanzado");
