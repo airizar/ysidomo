@@ -32,19 +32,23 @@ label.toggle {
     margin: 5px;
 }
 
-.float-rigth{
-    float: right: ;
-}
-
 .w-20{
+    display: inline;
     width: 15%;
 }
 
-
 .w-80{
-    width: 80%;
+    display: inline;
+    width: 75%;
 }
+
+.w-80.float-right{
+    display: inline-block;
+    alignment: right
+}
+
 
 .ysi-minus-red{
     color: #F00;
 }
+

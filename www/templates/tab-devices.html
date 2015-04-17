@@ -12,29 +12,32 @@
                     </div>
                 </ion-header-bar>
             </div>
-            < <div class="list ysi-list">
+            <div class="list ysi-list">
                 <div class="item ysi-item" ng-repeat="roomDevice in device.devices">
-                    <div class="buttons ysi-red w-20 {{showHiddenClass}}">
-                        <button class="button button-icon icon ion-minus-circled  hidden" show="data.showDelete" ng-click="onItemDelete(device,roomDevice)"></button>
+                    <div class="buttons w-20">
+                        <button class="button button-icon icon ysi-minus-red ion-minus-circled  {{showHiddenClass}}" show="data.showDelete" ng-click="onItemDelete(device,roomDevice)"></button>
                     </div>
                     <div class="w-80">
-                        {{roomDevice.name}}
-                        <label class="toggle float-right" ng-if="showToggle(roomDevice)">
+                        <label class="w-20 text-centered">{{roomDevice.name}}</label>
+                        <div class="w-80 float-right">
+                        <label class="toggle" ng-if="showToggle(roomDevice)">
                             <input type="checkbox" ng-model="roomDevice.status">
                             <div class="track">
                                 <div class="handle"></div>
                             </div>
                         </label>
-                        <div class="item range range-positive float-right" ng-if="showRange(roomDevice)">
+                        <div class="item range range-positive" ng-if="showRange(roomDevice)">
                             <!--<i class="icon ion-ios7-sunny-outline"></i>-->
-                            <span class="minMax">min</span>
-                            <input type="range" name="volume" min="0" max="100" value="33">
-                            <span class="minMax">Max</span>
+                            <span class="minMax in-line">min</span>
+                            <input type="range" name="volume" min="0" max="100" value="33" class="in-line">
+                            <span class="minMax in-line">Max</span>
                             <!--<i class="icon ion-ios7-sunny"></i>-->
                         </div>
-                        <div class="item range range-positive float-right" ng-if="showInfo(roomDevice)">
+                        <div class="item range range-positive" ng-if="showInfo(roomDevice)">
                             <span class="infoValue">{{roomDevice.status}}</span>
                         </div>
+                        </div>
+                        
                     </div>
                 </div>
         </div>
