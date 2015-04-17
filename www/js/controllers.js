@@ -60,7 +60,7 @@ angular.module('starter.controllers', [])
         }
 
     };
-    DB.getRooms(success);
+    //DB.getRooms(success);
 
 
     /*Quitar un sensor de una habitación: en pantalla y BD*/

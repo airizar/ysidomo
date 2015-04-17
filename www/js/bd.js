@@ -65,13 +65,14 @@ angular.module('starter.DB', [])
         };
 
         var getRooms = function(success) {
-            db.onReady(db.from('rooms').list().done(function(records) {
+            db.onReady(function(e){db.from('rooms').list().done(function(records) {
                 //Se nos habia perdido la llamada a success por ahi
                 console.log('Listing rooms...');
                 success(records);
             }).fail(function() {
                 console.log('No rooms');
-            }));
+            });
+        });
         };
 
         var getWarnings = function(success) {
