@@ -9,15 +9,15 @@
                 "parents": {
                     "/*": [
                         {
-                            "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"Console\"><param name=\"ios-package\" value=\"CDVLogger\" /></feature>",
                             "count": 1
                         },
                         {
                             "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -26,13 +26,13 @@
         }
     },
     "installed_plugins": {
-        "com.ionic.keyboard": {
-            "PACKAGE_NAME": "com.company.ysidomo"
-        },
         "org.apache.cordova.console": {
             "PACKAGE_NAME": "com.company.ysidomo"
         },
         "org.apache.cordova.device": {
+            "PACKAGE_NAME": "com.company.ysidomo"
+        },
+        "com.ionic.keyboard": {
             "PACKAGE_NAME": "com.company.ysidomo"
         }
     },

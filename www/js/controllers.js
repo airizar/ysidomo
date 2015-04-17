@@ -66,7 +66,7 @@ angular.module('starter.controllers', [])
     /*Quitar un sensor de una habitación: en pantalla y BD*/
     $scope.showHiddenDelete = function() {
         if ($scope.showHiddenClass == 'ysi-hidden') {
-            $scope.showHiddenClass = 'ysi-show';
+            $scope.showHiddenClass = '';
         } else {
             $scope.showHiddenClass = 'ysi-hidden';
         }
